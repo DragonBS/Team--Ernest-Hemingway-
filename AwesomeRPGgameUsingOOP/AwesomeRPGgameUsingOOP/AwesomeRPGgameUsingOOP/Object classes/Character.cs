@@ -12,7 +12,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
        public int Damage { get; set; }
        public bool IsAlive { get; set; }
 
-       // //HERO
+       // //HERO !!!
        //public int FreeInventory { get; set; }
        //public int HealthOfHero{ get; set; }
        //public int ArmourOfHero{ get; set; }
@@ -20,11 +20,11 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
        //public List<Item> Items { get; set; } 
 
 
-       // //NPC
+       // //NPC  !!!
        // override const bool IsAlive = true;
        // public List<Item> Items { get; set; } 
 
-       // //ENEMY
+       // //ENEMY  !!!
        // public int HealthOfEnemy { get; set; }
        // public int ArmourOfEnemy { get; set; }
        // public int DamageOfEnemy { get; set; }
