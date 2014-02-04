@@ -107,11 +107,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Object classes\Character.cs" />
-    <Compile Include="Object classes\Enemy.cs" />
-    <Compile Include="Object classes\Hero.cs" />
+    <Compile Include="Object classes\Characters\Character.cs" />
+    <Compile Include="Object classes\Characters\Enemy.cs" />
+    <Compile Include="Object classes\Characters\Hero.cs" />
     <Compile Include="Object classes\Item.cs" />
-    <Compile Include="Object classes\NPC.cs" />
+    <Compile Include="Object classes\Characters\NPC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

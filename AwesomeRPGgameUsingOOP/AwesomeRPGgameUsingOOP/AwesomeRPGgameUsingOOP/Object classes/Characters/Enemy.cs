@@ -5,9 +5,8 @@ using System.Text;
 
 namespace AwesomeRPGgameUsingOOP.Object_classes
 {
-    public class NPC:Character
+    public class Enemy:Character
     {
-        override const bool IsAlive = true;
-        public List<Item> Items { get; set; } 
+        
     }
 }
