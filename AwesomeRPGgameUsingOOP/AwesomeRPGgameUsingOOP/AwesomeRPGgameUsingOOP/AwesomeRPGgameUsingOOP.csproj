@@ -110,8 +110,10 @@
     <Compile Include="Object classes\Characters\Character.cs" />
     <Compile Include="Object classes\Characters\Enemy.cs" />
     <Compile Include="Object classes\Characters\Hero.cs" />
-    <Compile Include="Object classes\Item.cs" />
+    <Compile Include="Object classes\Items\Armour.cs" />
+    <Compile Include="Object classes\Items\Item.cs" />
     <Compile Include="Object classes\Characters\NPC.cs" />
+    <Compile Include="Object classes\Items\Weapons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

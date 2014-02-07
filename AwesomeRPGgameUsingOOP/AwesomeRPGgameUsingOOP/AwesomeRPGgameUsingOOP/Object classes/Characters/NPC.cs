@@ -7,7 +7,12 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
 {
     public class NPC:Character
     {
-        override const bool IsAlive = true;
+        
+        public NPC()
+        {
+            this.IsAlive = true;
+        }
+
      
     }
 }
