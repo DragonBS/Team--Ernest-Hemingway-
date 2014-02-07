@@ -12,8 +12,8 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Items
         public Weapon generateWeapon()
         {
             Weapon result = new Weapon();
-            result.Damage = Item.rnd.Next();
-            result.Value = rnd.Next();
+            result.Damage = Item.rnd.Next(40);
+            result.Value = rnd.Next(80);
             return result;
         }
     }

@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace AwesomeRPGgameUsingOOP.Object_classes
 {
     public class Hero: Character
     {
         static List<int> herolevels = new List<int>(); //list containing exp treshholds for the character levels;
-        
+
+        public Texture2D HeroTexture { get; set; }
+        public Vector2 HeroVector { get; set; }
+
         public int FreeInventorySlots { get; set; }
-        public int Experience { get; set; }
         public int HeroLevel { get; set; }
         public int SkillPoints { get; set; }
         public int PowerPoints { get; set; }
+        
 
         public Hero()
         {
-            herolevels.Clear();//adding the needed xp for next lvl
+            herolevels.Clear();//adding the needed xp for next lvls
             herolevels.Add(40);
             herolevels.Add(95);
             herolevels.Add(160);
@@ -32,6 +37,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
             this.Damage = 5;
             this.SkillPoints = 0;
             this.PowerPoints = 0;
+            this.Gold = 10;
         }
 
 

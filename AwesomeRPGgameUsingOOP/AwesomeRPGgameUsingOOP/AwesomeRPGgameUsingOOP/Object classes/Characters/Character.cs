@@ -17,7 +17,9 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
        public int Armour { get; set; }
        public int Damage { get; set; }
        public bool IsAlive { get; set; }
-       public List<Item> Items { get; set; } 
+       public List<Item> Items { get; set; }
+       public int Gold { get; set; }
+       public int Experience { get; set; }
 
         internal int DealDamage(int DamageAttacker, int ArmourDefender)
         {

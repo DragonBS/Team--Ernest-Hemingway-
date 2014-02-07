@@ -12,7 +12,8 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
         public int Armour { get; set; }
         public int Damage { get; set; }
         public int Value { get; set; }
-        protected static Random rnd=new Random(10);
+        protected static Random rnd=new Random(); //used for item generation
+        public bool IsEquipped { get; set; }
 
        
 
