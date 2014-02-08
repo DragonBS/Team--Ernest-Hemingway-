@@ -10,14 +10,14 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 
-namespace AwesomeRPGgameUsingOOP.Scenes
+namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
 {
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class MainScene : Microsoft.Xna.Framework.GameComponent
+    public class CharacterSheet_Inventory : Microsoft.Xna.Framework.GameComponent
     {
-        public MainScene(Game game)
+        public CharacterSheet_Inventory(Game game)
             : base(game)
         {
             // TODO: Construct any child components here
@@ -38,12 +38,13 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         /// Allows the game component to update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, SoundEffect effect)
         {
+            // TODO: Add your update code here
             #region Controls
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
             {
-
+                    
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
             {
@@ -58,7 +59,6 @@ namespace AwesomeRPGgameUsingOOP.Scenes
 
             }
             #endregion
-            // TODO: Add your update code here
 
             base.Update(gameTime);
         }

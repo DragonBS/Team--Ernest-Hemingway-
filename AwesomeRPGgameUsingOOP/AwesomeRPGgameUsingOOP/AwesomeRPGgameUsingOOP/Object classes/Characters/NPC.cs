@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace AwesomeRPGgameUsingOOP.Object_classes
 {
     public class NPC:Character
     {
-        override const bool IsAlive = true;
+        public Texture2D NPCTexture { get; set; }
+        public Vector2 NPCVector { get; set; }
+        
+        public NPC()
+        {
+            this.IsAlive = true;
+        }
+
      
     }
 }
