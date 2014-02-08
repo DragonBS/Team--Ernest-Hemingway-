@@ -1,6 +1,0 @@
-C:\Users\AdminBS\Team--Ernest-Hemingway-\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\obj\x86\Debug\AwesomeRPGgameUsingOOP.csprojResolveAssemblyReference.cache
-C:\Users\AdminBS\Team--Ernest-Hemingway-\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Users\AdminBS\Team--Ernest-Hemingway-\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\bin\x86\Debug\AwesomeRPGgameUsingOOP.exe
-C:\Users\AdminBS\Team--Ernest-Hemingway-\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\bin\x86\Debug\AwesomeRPGgameUsingOOP.pdb
-C:\Users\AdminBS\Team--Ernest-Hemingway-\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\obj\x86\Debug\AwesomeRPGgameUsingOOP.exe
-C:\Users\AdminBS\Team--Ernest-Hemingway-\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\AwesomeRPGgameUsingOOP\obj\x86\Debug\AwesomeRPGgameUsingOOP.pdb
