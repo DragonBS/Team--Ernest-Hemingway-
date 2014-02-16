@@ -19,8 +19,18 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
     /// </summary>
     public class CharacterSheet_Inventory : Microsoft.Xna.Framework.GameComponent
     {
-        private bool InventoryIsOpen { get; set; }
-        private Item[,] VisualiseInventory { get; set; }
+        internal int placeInInventory;
+        internal int row;
+        internal int column;
+        internal float gamepassed;
+        internal float timer;
+        internal const float DELAY = 0.15f;
+
+        internal static int inventor = 100;
+        private Texture2D itemPic;
+        private Texture2D itemFrame;
+
+
         public CharacterSheet_Inventory(Game game)
             : base(game)
         {
@@ -34,81 +44,121 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
         public override void Initialize()
         {
             // TODO: Add your initialization code here
-            InventoryIsOpen = true;
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
+            placeInInventory = 0;
+            row = 0;
+            column = 0;
+            timer = DELAY;
 
-                }
-            }
             base.Initialize();
         }
 
+        public void LoadContent(ContentManager content)
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+
+            // TODO: use this.Content to load your game content here
+
+            itemPic = content.Load<Texture2D>("item");
+            itemFrame = content.Load<Texture2D>("frame");
+        }
         /// <summary>
         /// Allows the game component to update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            int placeInInventory = 0;
+            gamepassed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            timer = timer - gamepassed;
             // TODO: Add your update code here
             #region Controls
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
+            if (timer < 0)
             {
-                if (placeInInventory <= 11)
+                timer = DELAY;
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
                 {
-                    placeInInventory = placeInInventory + 4;
+                    if (placeInInventory <= 11)
+                    {
+                        placeInInventory = placeInInventory + 4;
+                        row++;
+                    }
+                    else
+                    {
+                        placeInInventory = placeInInventory - 11;
+                        row = 0;
+                    }
                 }
-                else
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
                 {
-                    placeInInventory = placeInInventory - 11;
+                    if (placeInInventory > 3)
+                    {
+                        placeInInventory = placeInInventory - 4;
+                        row--;
+                    }
+                    else
+                    {
+                        placeInInventory = placeInInventory + 11;
+                        row = 3;
+                    }
                 }
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
+                {
+                    if ((placeInInventory != 0) && (placeInInventory % 4 != 0))
+                    {
+                        placeInInventory = placeInInventory - 1;
+                        column--;
+                    }
+                    else
+                    {
+                        placeInInventory = placeInInventory + 3;
+                        column = 3;
+                    }
+                }
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
+                {
+                    if ((placeInInventory != 3) && (placeInInventory != 7) && (placeInInventory != 11) && (placeInInventory != 15))
+                    {
+                        placeInInventory = placeInInventory + 1;
+                        column++;
+                    }
+                    else
+                    {
+                        placeInInventory = placeInInventory - 3;
+                        column = 0;
+                    }
+                }
+
+
             }
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
-            {
-                if (placeInInventory > 3)
-                {
-                    placeInInventory = placeInInventory - 4;
-                }
-                else
-                {
-                    placeInInventory = placeInInventory + 11;
-                }
-            }
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
-            {
-                if ((placeInInventory != 0) && (placeInInventory % 4 != 0))
-                {
-                    placeInInventory = placeInInventory - 1;
-                }
-                else
-                {
-                    placeInInventory = placeInInventory + 3;
-                }
-            }
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
-            {
-                if ((placeInInventory != 3) && (placeInInventory != 7) && (placeInInventory != 11) && (placeInInventory != 15))
-                {
-                    placeInInventory = placeInInventory + 1;
-                }
-                else
-                {
-                    placeInInventory = placeInInventory - 3;
-                }
-            }
+
             #endregion
 
             base.Update(gameTime);
         }
-        protected void Draw(GameTime gameTime)
+
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            // GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
 
-            // base.Draw(gameTime);
+
+            spriteBatch.Begin();
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+
+                    spriteBatch.Draw(itemPic, new Vector2(i * 64 + inventor, j * 64 + inventor), Color.White);
+                    if ((i == column) && (j == row))
+                    {
+                        spriteBatch.Draw(itemFrame, new Vector2(i * 64 + inventor, j * 64 + inventor), Color.White);
+                    }
+                }
+            }
+
+            spriteBatch.End();
+
+            //base.Draw(gameTime);
         }
     }
 }
