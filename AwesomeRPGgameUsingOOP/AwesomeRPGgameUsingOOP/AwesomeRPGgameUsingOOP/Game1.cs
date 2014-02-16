@@ -71,7 +71,10 @@ namespace AwesomeRPGgameUsingOOP
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
+            {
+                this.Exit();
+            }
             // Allows the game to exit
             startingScene.Update(gameTime);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
