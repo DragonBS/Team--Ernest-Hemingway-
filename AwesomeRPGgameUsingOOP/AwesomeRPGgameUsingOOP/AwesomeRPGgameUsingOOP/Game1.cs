@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using AwesomeRPGgameUsingOOP.Scenes;
 
 namespace AwesomeRPGgameUsingOOP
 {
@@ -18,9 +19,11 @@ namespace AwesomeRPGgameUsingOOP
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        StartingScene startingScene;
+        
         public Game1()
         {
+            startingScene = new StartingScene(this);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -44,7 +47,9 @@ namespace AwesomeRPGgameUsingOOP
         /// </summary>
         protected override void LoadContent()
         {
+            
             // Create a new SpriteBatch, which can be used to draw textures.
+            startingScene.LoadContent(Content, graphics);
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
@@ -82,7 +87,7 @@ namespace AwesomeRPGgameUsingOOP
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            startingScene.Draw(gameTime, spriteBatch);
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

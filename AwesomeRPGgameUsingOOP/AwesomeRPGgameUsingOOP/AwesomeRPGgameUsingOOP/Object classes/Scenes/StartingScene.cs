@@ -18,8 +18,14 @@ namespace AwesomeRPGgameUsingOOP.Scenes
     public class StartingScene : Microsoft.Xna.Framework.GameComponent
     {
         private byte Choice { get; set; }
-        private Texture2D background;
-        private Vector2 vector;
+        private Texture2D backgroundTexture;
+        private Vector2 backgroundVector;
+        private Texture2D helpTexture;
+        private Vector2 helpVector;
+        private Texture2D startTexture;
+        private Vector2 startVector;
+        private Texture2D exitTexture;
+        private Vector2 exitVector;
 
         public StartingScene(Game game)
             : base(game)
@@ -34,27 +40,25 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         public override void Initialize()
         {
             // TODO: Add your initialization code here
-
-            
+                        
             base.Initialize();
             this.Choice = 0;
-            
-
-
         }
 
-        protected void LoadContent(ContentManager content)
+        public void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             
             // TODO: use this.Content to load your game content here
 
-            background = content.Load<Texture2D>("backgroundArtwork.jpg");
-            vector = new Vector2(0, 0);
-
-            
-            
-
+            backgroundTexture = content.Load<Texture2D>("backgroungArtwork");
+            backgroundVector = new Vector2(0, 0);
+            helpTexture = content.Load<Texture2D>("HELP");
+            helpVector = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2 - helpTexture.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2 - helpTexture.Height / 2 + 150);
+            startTexture = content.Load<Texture2D>("START");
+            startVector = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2 - startTexture.Width / 2, helpVector.Y - 75);
+            exitTexture = content.Load<Texture2D>("EXIT");
+            exitVector = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2 - exitTexture.Width / 2, helpVector.Y + 75);
         }
 
         /// <summary>
@@ -100,14 +104,17 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             // help
         }
 
-        protected void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
-            spriteBatch.Draw(background, vector, Color.White);
+            spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
+            spriteBatch.Draw(helpTexture, helpVector, Color.White);
+            spriteBatch.Draw(startTexture, startVector, Color.White);
+            spriteBatch.Draw(exitTexture, exitVector, Color.White);
             spriteBatch.End();
 
             //base.Draw(gameTime);
