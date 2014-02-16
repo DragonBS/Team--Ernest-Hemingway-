@@ -96,7 +96,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
                 }
 
             }
-
+            
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
             {
                 if (this.Choice == MenuOptions.NewGameActive)
