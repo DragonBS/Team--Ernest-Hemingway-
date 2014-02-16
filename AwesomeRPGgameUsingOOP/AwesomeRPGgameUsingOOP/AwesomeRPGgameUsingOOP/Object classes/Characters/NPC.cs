@@ -17,6 +17,6 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
             this.IsAlive = true;
         }
 
-     
+        
     }
 }

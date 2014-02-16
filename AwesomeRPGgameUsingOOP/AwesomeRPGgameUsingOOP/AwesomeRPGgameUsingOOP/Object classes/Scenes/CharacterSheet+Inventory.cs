@@ -38,7 +38,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
         /// Allows the game component to update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public override void Update(GameTime gameTime, SoundEffect effect)
+        public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
             #region Controls

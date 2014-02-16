@@ -17,6 +17,8 @@ namespace AwesomeRPGgameUsingOOP.Scenes
     /// </summary>
     public class StartingScene : Microsoft.Xna.Framework.GameComponent
     {
+        private byte Choice { get; set; }
+        
         public StartingScene(Game game)
             : base(game)
         {
@@ -32,6 +34,10 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             // TODO: Add your initialization code here
 
             base.Initialize();
+            this.Choice = 0;
+
+
+
         }
 
         /// <summary>
@@ -43,6 +49,38 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             // TODO: Add your update code here
 
             base.Update(gameTime);
+
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
+            {
+                if (this.Choice == 1)
+                {
+                    this.Choice = 0;
+                }
+                if (this.Choice == 0)
+                {
+                    this.Choice = 1;
+                }
+            }
+
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
+            {
+                if (this.Choice == 1)
+                {
+                    this.Choice = 0;
+                }
+                if (this.Choice == 0)
+                {
+                    this.Choice = 1;
+                }
+            }
+            
+                        
+
+            Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left);
+            Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right);
+
+            // play
+            // help
         }
     }
 }
