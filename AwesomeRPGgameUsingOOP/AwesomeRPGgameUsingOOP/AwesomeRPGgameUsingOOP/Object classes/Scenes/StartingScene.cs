@@ -18,7 +18,9 @@ namespace AwesomeRPGgameUsingOOP.Scenes
     public class StartingScene : Microsoft.Xna.Framework.GameComponent
     {
         private byte Choice { get; set; }
-        
+        private Texture2D background;
+        private Vector2 vector;
+
         public StartingScene(Game game)
             : base(game)
         {
@@ -33,10 +35,25 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         {
             // TODO: Add your initialization code here
 
+            
             base.Initialize();
             this.Choice = 0;
+            
 
 
+        }
+
+        protected void LoadContent(ContentManager content)
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            
+            // TODO: use this.Content to load your game content here
+
+            background = content.Load<Texture2D>("backgroundArtwork.jpg");
+            vector = new Vector2(0, 0);
+
+            
+            
 
         }
 
@@ -82,5 +99,19 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             // play
             // help
         }
+
+        protected void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(background, vector, Color.White);
+            spriteBatch.End();
+
+            //base.Draw(gameTime);
+        }
+
     }
 }
