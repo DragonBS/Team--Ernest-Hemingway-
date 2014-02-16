@@ -34,6 +34,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private Vector2 exitVector;
         private Texture2D arrowTexture;
         private Vector2 arrowVector;
+        private int timeOfLastKeyPressing;
         
 
         public StartingScene(Game game)
@@ -69,8 +70,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             exitTexture = content.Load<Texture2D>("exit1");
             exitVector = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2 - exitTexture.Width / 2, helpVector.Y + 75);
             arrowTexture = content.Load<Texture2D>("arrow1");
-            arrowVector = new Vector2((int)(graphics.GraphicsDevice.Viewport.Width / 2.6) - startTexture.Width / 2 , startVector.Y);
-            
+            arrowVector = new Vector2((int)(graphics.GraphicsDevice.Viewport.Width / 2.6) - startTexture.Width / 2 , startVector.Y);                       
         }
 
         /// <summary>
@@ -94,6 +94,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
                 {
                     this.Choice = MenuOptions.NewGameActive;
                 }
+
             }
 
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
