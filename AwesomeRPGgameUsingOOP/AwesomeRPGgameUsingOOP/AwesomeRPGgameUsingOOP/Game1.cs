@@ -72,6 +72,7 @@ namespace AwesomeRPGgameUsingOOP
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
+            startingScene.Update(gameTime);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 

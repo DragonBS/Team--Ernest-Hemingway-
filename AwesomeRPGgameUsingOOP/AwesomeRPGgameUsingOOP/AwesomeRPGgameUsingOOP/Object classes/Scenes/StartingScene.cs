@@ -15,9 +15,15 @@ namespace AwesomeRPGgameUsingOOP.Scenes
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
+    /// 
+    public enum MenuOptions
+    { 
+        NewGameActive, HelpActive
+    };
+
     public class StartingScene : Microsoft.Xna.Framework.GameComponent
     {
-        private byte Choice { get; set; }
+        private MenuOptions Choice { get; set; }
         private Texture2D backgroundTexture;
         private Vector2 backgroundVector;
         private Texture2D helpTexture;
@@ -26,6 +32,9 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private Vector2 startVector;
         private Texture2D exitTexture;
         private Vector2 exitVector;
+        private Texture2D arrowTexture;
+        private Vector2 arrowVector;
+        
 
         public StartingScene(Game game)
             : base(game)
@@ -42,7 +51,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             // TODO: Add your initialization code here
                         
             base.Initialize();
-            this.Choice = 0;
+            this.Choice = MenuOptions.NewGameActive;
         }
 
         public void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
@@ -53,12 +62,15 @@ namespace AwesomeRPGgameUsingOOP.Scenes
 
             backgroundTexture = content.Load<Texture2D>("backgroungArtwork");
             backgroundVector = new Vector2(0, 0);
-            helpTexture = content.Load<Texture2D>("HELP");
+            helpTexture = content.Load<Texture2D>("help2");
             helpVector = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2 - helpTexture.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2 - helpTexture.Height / 2 + 150);
-            startTexture = content.Load<Texture2D>("START");
+            startTexture = content.Load<Texture2D>("newGame2");
             startVector = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2 - startTexture.Width / 2, helpVector.Y - 75);
-            exitTexture = content.Load<Texture2D>("EXIT");
+            exitTexture = content.Load<Texture2D>("exit1");
             exitVector = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2 - exitTexture.Width / 2, helpVector.Y + 75);
+            arrowTexture = content.Load<Texture2D>("arrow1");
+            arrowVector = new Vector2((int)(graphics.GraphicsDevice.Viewport.Width / 2.6) - startTexture.Width / 2 , startVector.Y);
+            
         }
 
         /// <summary>
@@ -68,30 +80,31 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
-
+            
             base.Update(gameTime);
 
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
             {
-                if (this.Choice == 1)
+                
+                if (this.Choice == MenuOptions.NewGameActive)
                 {
-                    this.Choice = 0;
+                    this.Choice = MenuOptions.HelpActive;
                 }
-                if (this.Choice == 0)
+                else if (this.Choice == MenuOptions.HelpActive)
                 {
-                    this.Choice = 1;
+                    this.Choice = MenuOptions.NewGameActive;
                 }
             }
 
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
             {
-                if (this.Choice == 1)
+                if (this.Choice == MenuOptions.NewGameActive)
                 {
-                    this.Choice = 0;
+                    this.Choice = MenuOptions.HelpActive;
                 }
-                if (this.Choice == 0)
+                else if (this.Choice == MenuOptions.HelpActive)
                 {
-                    this.Choice = 1;
+                    this.Choice = MenuOptions.NewGameActive;
                 }
             }
             
@@ -111,10 +124,34 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
+            
+
             spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
             spriteBatch.Draw(helpTexture, helpVector, Color.White);
             spriteBatch.Draw(startTexture, startVector, Color.White);
             spriteBatch.Draw(exitTexture, exitVector, Color.White);
+            switch (Choice)
+            {
+                case MenuOptions.NewGameActive:
+                    {
+                        arrowVector.Y = startVector.Y;
+                        spriteBatch.Draw(arrowTexture, arrowVector, Color.White);
+                        break;
+
+                    }
+                case MenuOptions.HelpActive:
+                    {
+                        arrowVector.Y = helpVector.Y;
+                        spriteBatch.Draw(arrowTexture, arrowVector, Color.White);
+                        break;
+                    }
+                default:
+                    {
+                        spriteBatch.Draw(arrowTexture, arrowVector, Color.White);
+                        break;
+                    };
+
+            };
             spriteBatch.End();
 
             //base.Draw(gameTime);
