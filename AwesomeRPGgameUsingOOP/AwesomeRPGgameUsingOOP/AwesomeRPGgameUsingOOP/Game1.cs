@@ -20,6 +20,7 @@ namespace AwesomeRPGgameUsingOOP
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         StartingScene startingScene;
+        int delayer;
         
         public Game1()
         {
@@ -51,7 +52,7 @@ namespace AwesomeRPGgameUsingOOP
             // Create a new SpriteBatch, which can be used to draw textures.
             startingScene.LoadContent(Content, graphics);
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            delayer = 0;
             // TODO: use this.Content to load your game content here
         }
 
@@ -76,9 +77,16 @@ namespace AwesomeRPGgameUsingOOP
                 this.Exit();
             }
             // Allows the game to exit
-            startingScene.Update(gameTime);
+            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            delayer++;
+            if (delayer==7)
+            {
+                delayer = 0;
+                startingScene.Update(gameTime);
+            }
 
             // TODO: Add your update logic here
 
