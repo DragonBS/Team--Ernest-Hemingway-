@@ -34,7 +34,6 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private Vector2 exitVector;
         private Texture2D arrowTexture;
         private Vector2 arrowVector;
-        
 
         public StartingScene(Game game)
             : base(game)

@@ -20,7 +20,8 @@ namespace AwesomeRPGgameUsingOOP
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         StartingScene startingScene;
-        int delayer;
+        internal int delayer;
+        private bool isGraphicsSet;
         
         public Game1()
         {
@@ -72,6 +73,13 @@ namespace AwesomeRPGgameUsingOOP
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (isGraphicsSet == false)
+            {
+                graphics.PreferredBackBufferHeight = 768;
+                graphics.PreferredBackBufferWidth = 1024;
+                graphics.IsFullScreen = true;
+                isGraphicsSet = true;
+            }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
             {
                 this.Exit();
