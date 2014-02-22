@@ -111,10 +111,10 @@ namespace AwesomeRPGgameUsingOOP.Scenes
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
+           // spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
 
-            float scale = .9f; //50% smaller
-            spriteBatch.Draw(playerTexture, playerVector, new Rectangle(0, 0, 30, 60), Color.White, 0f, playerVector, scale, SpriteEffects.None, 0f);
+            //float scale = .9f; //50% smaller
+            //spriteBatch.Draw(playerTexture, playerVector, new Rectangle(0, 0, 30, 60), Color.White, 0f, playerVector, scale, SpriteEffects.None, 0f);
 
 
             spriteBatch.End();
@@ -122,4 +122,8 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             //base.Draw(gameTime);
         }
     }
+
+
+
+
 }

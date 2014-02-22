@@ -121,7 +121,7 @@ namespace AwesomeRPGgameUsingOOP
                 }
                 if (MainStarted)
                 {
-                    mainScene.Update(gameTime);
+                 //   mainScene.Update(gameTime);
                  //   MainStarted = false;
                 }
                 if (GameOverStarted)
