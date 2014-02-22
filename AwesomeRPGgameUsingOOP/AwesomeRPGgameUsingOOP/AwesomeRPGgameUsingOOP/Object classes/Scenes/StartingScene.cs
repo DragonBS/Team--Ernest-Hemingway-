@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.IO;
+using AwesomeRPGgameUsingOOP;
 
 
 namespace AwesomeRPGgameUsingOOP.Scenes
@@ -177,6 +178,11 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             {
                 spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
                 spriteBatch.DrawString(helpMenuFont, helpMenuText, new Vector2(200, 200), Color.Black);
+            }
+
+            if (Choice==MenuOptions.NewGameActive&&choiceMade==true)
+            {
+                Game1.GameStarted = false;
             }
 
             spriteBatch.End();

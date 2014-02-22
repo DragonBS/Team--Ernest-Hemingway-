@@ -20,9 +20,16 @@ namespace AwesomeRPGgameUsingOOP
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         StartingScene startingScene;
+        MainScene mainScene;
+        GameOverScene gameoverScene;
         internal int delayer;
         private bool isGraphicsSet;
-        
+     static   public bool GameStarted;
+        public bool MainStarted;
+        public bool GameOverStarted;
+
+  
+
         public Game1()
         {
             startingScene = new StartingScene(this);
@@ -55,6 +62,10 @@ namespace AwesomeRPGgameUsingOOP
             spriteBatch = new SpriteBatch(GraphicsDevice);
             delayer = 0;
             // TODO: use this.Content to load your game content here
+            GameStarted=true;
+            MainStarted=false;
+            GameOverStarted=false;
+        
         }
 
         /// <summary>
@@ -73,6 +84,7 @@ namespace AwesomeRPGgameUsingOOP
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            #region graphicset
             if (isGraphicsSet == false)
             {
                 graphics.PreferredBackBufferHeight = 600;
@@ -81,12 +93,12 @@ namespace AwesomeRPGgameUsingOOP
                 isGraphicsSet = true;
                 graphics.ApplyChanges();
             }
+            #endregion
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
             {
                 this.Exit();
             }
             // Allows the game to exit
-            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
@@ -94,7 +106,22 @@ namespace AwesomeRPGgameUsingOOP
             if (delayer==7)
             {
                 delayer = 0;
-                startingScene.Update(gameTime);
+                if (GameStarted)
+                {
+                    startingScene.Update(gameTime);
+                //    GameStarted = false;
+                }
+                if (MainStarted)
+                {
+                    mainScene.Update(gameTime);
+                 //   MainStarted = false;
+                }
+                if (GameOverStarted)
+                {
+                    gameoverScene.Update(gameTime);
+                //    gameoverScene = false;
+                }
+                
             }
 
             // TODO: Add your update logic here
@@ -109,7 +136,10 @@ namespace AwesomeRPGgameUsingOOP
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            startingScene.Draw(gameTime, spriteBatch);
+            if (delayer == 7)
+            {
+                startingScene.Draw(gameTime, spriteBatch);
+            }
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
