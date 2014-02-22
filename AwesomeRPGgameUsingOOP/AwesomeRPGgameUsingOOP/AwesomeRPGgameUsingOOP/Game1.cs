@@ -34,6 +34,8 @@ namespace AwesomeRPGgameUsingOOP
         {
             startingScene = new StartingScene(this);
             graphics = new GraphicsDeviceManager(this);
+            mainScene=new MainScene(this);
+            gameoverScene=new GameOverScene(this);
             Content.RootDirectory = "Content";
         }
 
@@ -101,14 +103,14 @@ namespace AwesomeRPGgameUsingOOP
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
+            startingScene.Update(gameTime);
             delayer++;
             if (delayer==7)
             {
                 delayer = 0;
                 if (GameStarted)
                 {
-                    startingScene.Update(gameTime);
+                    
                 //    GameStarted = false;
                 }
                 if (MainStarted)
@@ -136,9 +138,10 @@ namespace AwesomeRPGgameUsingOOP
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            startingScene.Draw(gameTime, spriteBatch);
             if (delayer == 7)
             {
-                startingScene.Draw(gameTime, spriteBatch);
+                
             }
             // TODO: Add your drawing code here
 
