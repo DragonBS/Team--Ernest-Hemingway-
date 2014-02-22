@@ -38,7 +38,9 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private string helpMenuText;
         private SpriteFont helpMenuFont;
         private bool IsHelpOpen;
-
+        private Texture2D helpBackgroundTexture;
+        private Vector2 helpBackgroundVector;
+        
         public StartingScene(Game game)
             : base(game)
         {
@@ -75,6 +77,9 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             arrowVector = new Vector2((int)(graphics.GraphicsDevice.Viewport.Width / 2.6) - startTexture.Width / 2 , startVector.Y);
             helpMenuFont = content.Load<SpriteFont>("SpriteFont1");
             helpMenuText = File.ReadAllText(@"..\..\..\..\AwesomeRPGgameUsingOOPContent\HelpMenuV2.txt");
+            helpBackgroundTexture = content.Load<Texture2D>("WhiteBackgroundForHelpMenu2");
+            helpBackgroundVector = new Vector2(50, 175);
+
         }
 
         /// <summary>
@@ -172,6 +177,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             if ((Choice == MenuOptions.HelpActive) && (choiceMade == true))
             {
                 spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
+                spriteBatch.Draw(helpBackgroundTexture, helpBackgroundVector, Color.White * 0.5f);
                 spriteBatch.DrawString(helpMenuFont, helpMenuText, new Vector2(100, 200), Color.Black);
                 IsHelpOpen = true;
             }
