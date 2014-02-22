@@ -9,8 +9,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.IO;
-using AwesomeRPGgameUsingOOP;
-
 
 namespace AwesomeRPGgameUsingOOP.Scenes
 {
@@ -39,6 +37,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private bool choiceMade;
         private string helpMenuText;
         private SpriteFont helpMenuFont;
+        private bool IsHelpOpen;
 
         public StartingScene(Game game)
             : base(game)
@@ -88,52 +87,49 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             
             base.Update(gameTime);
 
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
+            if (IsHelpOpen)
             {
-                
-                if (this.Choice == MenuOptions.NewGameActive)
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
                 {
-                    this.Choice = MenuOptions.HelpActive;
-                    if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
-                    {
-                        choiceMade = true;
-                    }
-                }
-                else if (this.Choice == MenuOptions.HelpActive)
-                {
-                    this.Choice = MenuOptions.NewGameActive;
-                    if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
-                    {
-                        choiceMade = true;
-                    }
-                }
-
-            }
-            
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
-            {
-                if (this.Choice == MenuOptions.NewGameActive)
-                {
-                    this.Choice = MenuOptions.HelpActive;
-                    if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
-                    {
-                        choiceMade = true;
-                    }
-                }
-                else if (this.Choice == MenuOptions.HelpActive)
-                {
-                    this.Choice = MenuOptions.NewGameActive;
-                    if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
-                    {
-                        choiceMade = true;
-                    }
+                    choiceMade = false;
+                    IsHelpOpen = false;
                 }
             }
-            
-                        
+            else
+            {
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
+                {
+                    choiceMade = true;
+                }
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
+                {
 
-            Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left);
-            Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right);
+                    if (this.Choice == MenuOptions.NewGameActive)
+                    {
+                        this.Choice = MenuOptions.HelpActive;
+                    }
+                    else if (this.Choice == MenuOptions.HelpActive)
+                    {
+                        this.Choice = MenuOptions.NewGameActive;
+                    }
+
+                }
+
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
+                {
+                    if (this.Choice == MenuOptions.NewGameActive)
+                    {
+                        this.Choice = MenuOptions.HelpActive;
+                    }
+                    else if (this.Choice == MenuOptions.HelpActive)
+                    {
+                        this.Choice = MenuOptions.NewGameActive;
+                    }
+                }  
+            }
+
+            //Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left);
+            //Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right);
 
             // play
             // help
@@ -146,7 +142,6 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
-            
             spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
             spriteBatch.Draw(helpTexture, helpVector, Color.White);
             spriteBatch.Draw(startTexture, startVector, Color.White);
@@ -174,15 +169,11 @@ namespace AwesomeRPGgameUsingOOP.Scenes
 
             }
 
-            if (Choice == MenuOptions.HelpActive && choiceMade == true)
+            if ((Choice == MenuOptions.HelpActive) && (choiceMade == true))
             {
                 spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
-                spriteBatch.DrawString(helpMenuFont, helpMenuText, new Vector2(200, 200), Color.Black);
-            }
-
-            if (Choice==MenuOptions.NewGameActive&&choiceMade==true)
-            {
-                Game1.GameStarted = false;
+                spriteBatch.DrawString(helpMenuFont, helpMenuText, new Vector2(100, 200), Color.Black);
+                IsHelpOpen = true;
             }
 
             spriteBatch.End();
