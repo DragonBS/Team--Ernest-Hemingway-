@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using AwesomeRPGgameUsingOOP.Scenes;
+using AwesomeRPGgameUsingOOP.Object_classes;
 
 namespace AwesomeRPGgameUsingOOP
 {
@@ -19,12 +20,17 @@ namespace AwesomeRPGgameUsingOOP
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         StartingScene startingScene;
         MainScene mainScene;
         GameOverScene gameoverScene;
+        Hero hero; 
+
         internal int delayer;
+        
         private bool isGraphicsSet;
-     static   public bool GameStarted;
+
+        static   public bool GameStarted;
         public bool MainStarted;
         public bool GameOverStarted;
 
@@ -36,6 +42,7 @@ namespace AwesomeRPGgameUsingOOP
             graphics = new GraphicsDeviceManager(this);
             mainScene=new MainScene(this);
             gameoverScene=new GameOverScene(this);
+            hero = new Hero();
             Content.RootDirectory = "Content";
         }
 
@@ -67,7 +74,14 @@ namespace AwesomeRPGgameUsingOOP
             GameStarted=true;
             MainStarted=false;
             GameOverStarted=false;
-        
+
+            #region graphicset
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
+            #endregion
+
         }
 
         /// <summary>
@@ -86,16 +100,8 @@ namespace AwesomeRPGgameUsingOOP
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            #region graphicset
-            if (isGraphicsSet == false)
-            {
-                graphics.PreferredBackBufferHeight = 600;
-                graphics.PreferredBackBufferWidth = 800;
-                graphics.IsFullScreen = true;
-                isGraphicsSet = true;
-                graphics.ApplyChanges();
-            }
-            #endregion
+
+           
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
             {
                 this.Exit();
@@ -138,12 +144,9 @@ namespace AwesomeRPGgameUsingOOP
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
             startingScene.Draw(gameTime, spriteBatch);
-            if (delayer == 7)
-            {
-                
-            }
-            // TODO: Add your drawing code here
+                       // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
