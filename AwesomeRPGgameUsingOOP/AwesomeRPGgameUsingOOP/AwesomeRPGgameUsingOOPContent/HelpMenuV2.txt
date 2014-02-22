@@ -1,0 +1,10 @@
+Help Menu
+
+Welcome to the GAME. Here are the main instructions you would need to play the game.
+
+To move your hero horizontally or vertically, please, use the Arrow keys.
+To attack an enemy, please, use the Space bar.
+To open your inventory, please, press “ i ”.
+To open the skills menu, please, press “ s “.
+
+Press ESC to exit the game at any time.

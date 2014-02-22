@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.IO;
 
 
 namespace AwesomeRPGgameUsingOOP.Scenes
@@ -34,6 +35,9 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private Vector2 exitVector;
         private Texture2D arrowTexture;
         private Vector2 arrowVector;
+        private bool choiceMade;
+        private string helpMenuText;
+        private SpriteFont helpMenuFont;
 
         public StartingScene(Game game)
             : base(game)
@@ -68,7 +72,9 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             exitTexture = content.Load<Texture2D>("exit1");
             exitVector = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2 - exitTexture.Width / 2, helpVector.Y + 75);
             arrowTexture = content.Load<Texture2D>("arrow1");
-            arrowVector = new Vector2((int)(graphics.GraphicsDevice.Viewport.Width / 2.6) - startTexture.Width / 2 , startVector.Y);                       
+            arrowVector = new Vector2((int)(graphics.GraphicsDevice.Viewport.Width / 2.6) - startTexture.Width / 2 , startVector.Y);
+            helpMenuFont = content.Load<SpriteFont>("SpriteFont1");
+            helpMenuText = File.ReadAllText(@"..\..\..\..\AwesomeRPGgameUsingOOPContent\HelpMenuV2.txt");
         }
 
         /// <summary>
@@ -87,10 +93,18 @@ namespace AwesomeRPGgameUsingOOP.Scenes
                 if (this.Choice == MenuOptions.NewGameActive)
                 {
                     this.Choice = MenuOptions.HelpActive;
+                    if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
+                    {
+                        choiceMade = true;
+                    }
                 }
                 else if (this.Choice == MenuOptions.HelpActive)
                 {
                     this.Choice = MenuOptions.NewGameActive;
+                    if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
+                    {
+                        choiceMade = true;
+                    }
                 }
 
             }
@@ -100,10 +114,18 @@ namespace AwesomeRPGgameUsingOOP.Scenes
                 if (this.Choice == MenuOptions.NewGameActive)
                 {
                     this.Choice = MenuOptions.HelpActive;
+                    if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
+                    {
+                        choiceMade = true;
+                    }
                 }
                 else if (this.Choice == MenuOptions.HelpActive)
                 {
                     this.Choice = MenuOptions.NewGameActive;
+                    if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter))
+                    {
+                        choiceMade = true;
+                    }
                 }
             }
             
@@ -124,7 +146,6 @@ namespace AwesomeRPGgameUsingOOP.Scenes
 
             spriteBatch.Begin();
             
-
             spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
             spriteBatch.Draw(helpTexture, helpVector, Color.White);
             spriteBatch.Draw(startTexture, startVector, Color.White);
@@ -150,7 +171,14 @@ namespace AwesomeRPGgameUsingOOP.Scenes
                         break;
                     };
 
-            };
+            }
+
+            if (Choice == MenuOptions.HelpActive && choiceMade == true)
+            {
+                spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
+                spriteBatch.DrawString(helpMenuFont, helpMenuText, new Vector2(200, 200), Color.Black);
+            }
+
             spriteBatch.End();
 
             //base.Draw(gameTime);
