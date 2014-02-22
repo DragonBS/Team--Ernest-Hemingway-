@@ -25,14 +25,14 @@ namespace AwesomeRPGgameUsingOOP
         MainScene mainScene;
         GameOverScene gameoverScene;
         Hero hero; 
-
+         
         internal int delayer;
         
         private bool isGraphicsSet;
 
-        static   public bool GameStarted;
-        public bool MainStarted;
-        public bool GameOverStarted;
+        static public bool GameStarted;
+        static public bool MainStarted;
+        static public bool GameOverStarted;
 
   
 
@@ -109,14 +109,14 @@ namespace AwesomeRPGgameUsingOOP
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            startingScene.Update(gameTime);
+            
             delayer++;
             if (delayer==7)
             {
                 delayer = 0;
                 if (GameStarted)
                 {
-                    
+                    startingScene.Update(gameTime);
                 //    GameStarted = false;
                 }
                 if (MainStarted)
@@ -126,7 +126,7 @@ namespace AwesomeRPGgameUsingOOP
                 }
                 if (GameOverStarted)
                 {
-                    gameoverScene.Update(gameTime);
+                //   gameoverScene.Update(gameTime);
                 //    gameoverScene = false;
                 }
                 
@@ -145,7 +145,22 @@ namespace AwesomeRPGgameUsingOOP
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            startingScene.Draw(gameTime, spriteBatch);
+            if (GameStarted)
+            {
+                startingScene.Draw(gameTime, spriteBatch);
+                //    GameStarted = false;
+            }
+            if (MainStarted)
+            {
+                mainScene.Draw(gameTime, spriteBatch);
+                //   MainStarted = false;
+            }
+            if (GameOverStarted)
+            {
+                //gameoverScene.Draw(gameTime, spriteBatch);
+                //    gameoverScene = false;
+            }
+            
                        // TODO: Add your drawing code here
 
             base.Draw(gameTime);

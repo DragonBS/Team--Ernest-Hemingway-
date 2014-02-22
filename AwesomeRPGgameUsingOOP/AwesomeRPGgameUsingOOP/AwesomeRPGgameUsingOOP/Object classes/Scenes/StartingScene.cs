@@ -182,8 +182,13 @@ namespace AwesomeRPGgameUsingOOP.Scenes
                 IsHelpOpen = true;
             }
 
+            if ((Choice == MenuOptions.NewGameActive) && (choiceMade == true))
+            {
+                Game1.GameStarted = false;
+                Game1.MainStarted = true;
+                
+            }
             spriteBatch.End();
-
             //base.Draw(gameTime);
         }
 
