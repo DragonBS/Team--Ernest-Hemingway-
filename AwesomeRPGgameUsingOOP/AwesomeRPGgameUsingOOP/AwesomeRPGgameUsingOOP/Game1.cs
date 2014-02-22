@@ -75,10 +75,11 @@ namespace AwesomeRPGgameUsingOOP
         {
             if (isGraphicsSet == false)
             {
-                graphics.PreferredBackBufferHeight = 768;
-                graphics.PreferredBackBufferWidth = 1024;
+                graphics.PreferredBackBufferHeight = 600;
+                graphics.PreferredBackBufferWidth = 800;
                 graphics.IsFullScreen = true;
                 isGraphicsSet = true;
+                graphics.ApplyChanges();
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
             {
