@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using AwesomeRPGgameUsingOOP.Scenes;
 using AwesomeRPGgameUsingOOP.Object_classes;
+using AwesomeRPGgameUsingOOP.Object_classes.Items;
 
 namespace AwesomeRPGgameUsingOOP
 {
@@ -28,8 +29,6 @@ namespace AwesomeRPGgameUsingOOP
          
         internal int delayer;
         
-        private bool isGraphicsSet;
-
         static public bool GameStarted;
         static public bool MainStarted;
         static public bool GameOverStarted;
@@ -74,6 +73,8 @@ namespace AwesomeRPGgameUsingOOP
             GameStarted=true;
             MainStarted=false;
             GameOverStarted=false;
+            ItemPics.LoadContent(Content);
+            
 
             #region graphicset
             graphics.PreferredBackBufferHeight = 600;
