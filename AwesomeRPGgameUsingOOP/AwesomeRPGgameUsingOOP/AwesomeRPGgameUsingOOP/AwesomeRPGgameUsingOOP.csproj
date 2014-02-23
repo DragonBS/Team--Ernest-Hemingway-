@@ -119,7 +119,7 @@
     <Compile Include="Object classes\Characters\NPC.cs" />
     <Compile Include="Object classes\Items\ItemPics.cs" />
     <Compile Include="Object classes\Items\Weapons.cs" />
-    <Compile Include="Object classes\Scenes\CharacterSheet+Inventory.cs" />
+    <Compile Include="Object classes\Scenes\CharacterSheet_Inventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
