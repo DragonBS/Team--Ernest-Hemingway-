@@ -15,7 +15,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class MainScene : Microsoft.Xna.Framework.GameComponent
+    public class MainScene : Microsoft.Xna.Framework.DrawableGameComponent
     {
         private const float scalePlayer = .9f;
 
@@ -23,7 +23,9 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private Vector2 backgroundVector;
 
         private Texture2D playerTexture;
+        private Rectangle playerRectangle;
         private Vector2 playerVector;
+        private Vector2 playerPosition;
 
         private ContentManager content;
         private GraphicsDeviceManager graphics;
@@ -63,8 +65,10 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             backgroundTexture = Content.Load<Texture2D>("map");
             backgroundVector = new Vector2(0, 0);
 
-            //playerTexture = Content.Load<Texture2D>("hero");
-            //playerVector = new Vector2(400, 400);
+            playerTexture = Content.Load<Texture2D>("hero");
+            playerVector = new Vector2(0, 0);
+            playerRectangle = new Rectangle(0, 0, 30, 60);
+            playerPosition = new Vector2(380, 480);
         }
 
 
@@ -82,20 +86,21 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             #region Controls
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
             {
-
+                this.playerVector.X++;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
             {
-
+                this.playerVector.X--;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
             {
-
+                this.playerVector.Y--;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
             {
-
+                this.playerVector.Y++;
             }
+            spriteBatch.Draw(playerTexture, playerVector, null, Color.White, 0f, new Vector2(100,50), scalePlayer, SpriteEffects.None, 0f);
             #endregion
             // TODO: Add your update code here
 
@@ -113,11 +118,10 @@ namespace AwesomeRPGgameUsingOOP.Scenes
 
             spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
 
-            //spriteBatch.Draw(playerTexture, playerVector, new Rectangle(0, 0, 30, 60), Color.White, 0f, playerVector, scalePlayer, SpriteEffects.None, 0f);
-
+            spriteBatch.Draw(playerTexture, playerPosition, playerRectangle, Color.White, 0f, playerVector, scalePlayer, SpriteEffects.None, 0f);
             spriteBatch.End();
 
-            //base.Draw(gameTime);
+            base.Draw(gameTime);
         }
     }
 
