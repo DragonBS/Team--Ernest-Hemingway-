@@ -21,11 +21,15 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private Vector2 BackgroundVector;
         private SpriteFont font;
         private Hero hero;
+        private Texture2D arrowTexture;
+        private Vector2 arrowVector;
+        private float delta;
 
         public SkillsScene(Game game, Hero hero)
             : base(game)
         {
             this.hero = hero;
+            delta = 0;
             // TODO: Construct any child components here
         }
 
@@ -46,6 +50,8 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             font = content.Load<SpriteFont>("SpriteFont1");
             backGroundTexture = content.Load<Texture2D>("skills");
             BackgroundVector = new Vector2(0, 0);
+            arrowTexture = content.Load<Texture2D>("arrow1");
+            arrowVector = new Vector2(500, 300);
         }
 
         /// <summary>
@@ -111,6 +117,8 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         {
             spriteBatch.Begin();
             spriteBatch.Draw(backGroundTexture, BackgroundVector, Color.White);
+            spriteBatch.Draw(arrowTexture, new Vector2(arrowVector.X+(float)(Math.Sin(delta))*6, arrowVector.Y), Color.White);
+            delta += 0.1f;
             int numberOfPixels = 20;
             string name= "NAME";
             
