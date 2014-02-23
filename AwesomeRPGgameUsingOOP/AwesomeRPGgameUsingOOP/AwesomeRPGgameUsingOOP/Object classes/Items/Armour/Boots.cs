@@ -11,14 +11,9 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Items
         public Boots()
         {
             this.Type = ArmorType.Boots;
+            this.Armour = rnd.Next(15);
+            this.Health = rnd.Next(20);
+            this.Value = rnd.Next(50);
         }
-        public Boots generateArmour()
-        {
-            Boots result = new Boots();
-            result.Armour = rnd.Next(15);
-            result.Health = rnd.Next(20);
-            result.Value = rnd.Next(50);
-            return result;
-        }
-    }
+     }
 }

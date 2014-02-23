@@ -11,14 +11,9 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Items
         public Helm()
         {
             this.Type = ArmorType.Helm;
-        }
-        public Helm generateArmour()
-        {
-            Helm result = new Helm();
-            result.Armour = rnd.Next(35);
-            result.Health = rnd.Next(20);
-            result.Value = rnd.Next(100);
-            return result;
+            this.Armour = rnd.Next(35);
+            this.Health = rnd.Next(20);
+            this.Value = rnd.Next(100);
         }
     }
 }

@@ -43,6 +43,8 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
         {
             
             hero = new Hero();
+            hero.Items.Add(new Gloves());
+            hero.Items.Add(new Boots());
             // TODO: Construct any child components here
         }
 
@@ -137,7 +139,16 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
 
             #endregion
 
-            item = hero.Items[placeInInventory];
+
+                if (placeInInventory>hero.Items.Count-1)
+                {
+                    item = null;
+                }
+                else
+                {
+                    item = hero.Items[placeInInventory];
+                }
+            
             base.Update(gameTime);
         }
 
@@ -171,19 +182,63 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
                 spriteBatch.DrawString(inventoryFont, item.Health.ToString(), new Vector2(250, 374), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
                 
             }
+            Item rowColItem;
+            
             for (int i = 0; i < 4; i++) // rows
             {
                 intervalROW = 0;
                 intervalCOL = 10;
+
                 for (int j = 0; j < 4; j++) // columns
                 {
                     intervalCOL = i * 10 + 10;
-                    spriteBatch.Draw(itemPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White);
-                    intervalROW = j * 10+10;
+                    if (j * 4 + i > hero.Items.Count - 1)
+                    {
+                        rowColItem = null;
+                    }
+                    else
+                    {
+                        rowColItem = hero.Items[j * 4 + i];
+                    }
+                                        
+                    if (rowColItem != null)
+                    {
+                        switch (rowColItem.GetType().Name.ToString())
+                        {
+                            case "Weapon":
+                                {
+                                    spriteBatch.Draw(ItemPics.WeaponPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White);
+                                    break;
+                                }
+                            case "Boots":
+                                {
+                                    spriteBatch.Draw(ItemPics.BootsPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White);
+                                    break;
+                                }
+                            case "Body":
+                                {
+                                    spriteBatch.Draw(ItemPics.BodyPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White);
+                                    break;
+                                }
+                            case "Gloves":
+                                {
+                                    spriteBatch.Draw(ItemPics.GlovesPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White);
+                                    break;
+                                }
+                            case "Helm":
+                                {
+                                    spriteBatch.Draw(ItemPics.HelmPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White);
+                                    break;
+                                }
+                        }
+                        rowColItem = null;
+                    }
+                    //spriteBatch.Draw(itemPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White); // sword
+                    intervalROW = j * 10 + 10;
                    
                     if ((i == column) && (j == row))
                     {
-                       spriteBatch.Draw(itemFrame, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW-10), Color.White);
+                       spriteBatch.Draw(itemFrame, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW-10), Color.White); // framework
                     }
                 }
             }
