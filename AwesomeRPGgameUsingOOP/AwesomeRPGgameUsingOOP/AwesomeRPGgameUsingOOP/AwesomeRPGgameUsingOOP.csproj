@@ -117,6 +117,7 @@
     <Compile Include="Object classes\Items\Armour\Helm.cs" />
     <Compile Include="Object classes\Items\Item.cs" />
     <Compile Include="Object classes\Characters\NPC.cs" />
+    <Compile Include="Object classes\Items\ItemPics.cs" />
     <Compile Include="Object classes\Items\Weapons.cs" />
     <Compile Include="Object classes\Scenes\CharacterSheet+Inventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
