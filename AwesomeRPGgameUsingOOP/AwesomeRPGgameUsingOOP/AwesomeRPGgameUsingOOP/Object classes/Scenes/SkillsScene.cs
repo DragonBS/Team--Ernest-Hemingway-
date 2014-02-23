@@ -51,7 +51,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             backGroundTexture = content.Load<Texture2D>("skills");
             BackgroundVector = new Vector2(0, 0);
             arrowTexture = content.Load<Texture2D>("arrow1");
-            arrowVector = new Vector2(500, 300);
+            arrowVector = new Vector2(480, 340);
         }
 
         /// <summary>
@@ -119,6 +119,10 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             spriteBatch.Draw(backGroundTexture, BackgroundVector, Color.White);
             spriteBatch.Draw(arrowTexture, new Vector2(arrowVector.X+(float)(Math.Sin(delta))*6, arrowVector.Y), Color.White);
             delta += 0.1f;
+            if (delta > Math.PI*10)
+            {
+                delta = 0;
+            }
             int numberOfPixels = 20;
             string name= "NAME";
             
