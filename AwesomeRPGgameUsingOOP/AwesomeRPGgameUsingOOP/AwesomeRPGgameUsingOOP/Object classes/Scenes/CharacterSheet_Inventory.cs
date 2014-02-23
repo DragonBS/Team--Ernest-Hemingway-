@@ -19,21 +19,30 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
     /// </summary>
     public class CharacterSheet_Inventory : Microsoft.Xna.Framework.GameComponent
     {
+        Hero hero;
         internal int placeInInventory;
         internal int row;
         internal int column;
         internal float gamepassed;
         internal float timer;
         internal const float DELAY = 0.15f;
+        internal Item item;
+        internal static int inventorX = 357;
+        internal static int inventorY = 177;
+        internal static int intervalROW = 0;
+        internal static int intervalCOL = 0;
 
-        internal static int inventor = 100;
         private Texture2D itemPic;
         private Texture2D itemFrame;
+        private Texture2D inventory;
 
+        private SpriteFont inventoryFont;
 
         public CharacterSheet_Inventory(Game game)
             : base(game)
         {
+            
+            hero = new Hero();
             // TODO: Construct any child components here
         }
 
@@ -60,6 +69,8 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
 
             itemPic = content.Load<Texture2D>("item");
             itemFrame = content.Load<Texture2D>("frame");
+            inventory = content.Load<Texture2D>("inventory");
+            inventoryFont = content.Load<SpriteFont>("SpriteFont1");
         }
         /// <summary>
         /// Allows the game component to update itself.
@@ -71,9 +82,6 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
             timer = timer - gamepassed;
             // TODO: Add your update code here
             #region Controls
-            if (timer < 0)
-            {
-                timer = DELAY;
                 if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
                 {
                     if (placeInInventory <= 11)
@@ -127,12 +135,18 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
                     }
                 }
 
-
-            }
-
             #endregion
 
+            item = hero.Items[placeInInventory];
             base.Update(gameTime);
+        }
+
+        private void GetItemStatistics(out string health, out string damage, out string armor)
+        {
+            string nan = "N/A";
+            health = nan;
+            damage = nan;
+            armor = nan;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -140,25 +154,46 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
             //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
-
+            
             spriteBatch.Begin();
-            for (int i = 0; i < 4; i++)
+            spriteBatch.Draw(inventory, new Vector2(0, 0), Color.White);
+            
+            if (item == null)
             {
-                for (int j = 0; j < 4; j++)
+                spriteBatch.DrawString(inventoryFont, "0", new Vector2(250, 225), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
+                spriteBatch.DrawString(inventoryFont, "0", new Vector2(250, 298), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
+                spriteBatch.DrawString(inventoryFont, "0", new Vector2(250, 374), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
+            }
+            else
+            {
+                spriteBatch.DrawString(inventoryFont, item.Damage.ToString(), new Vector2(250, 225), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
+                spriteBatch.DrawString(inventoryFont, item.Armour.ToString(), new Vector2(250, 298), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
+                spriteBatch.DrawString(inventoryFont, item.Health.ToString(), new Vector2(250, 374), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
+                
+            }
+            for (int i = 0; i < 4; i++) // rows
+            {
+                intervalROW = 0;
+                intervalCOL = 10;
+                for (int j = 0; j < 4; j++) // columns
                 {
-
-                    spriteBatch.Draw(itemPic, new Vector2(i * 64 + inventor, j * 64 + inventor), Color.White);
+                    intervalCOL = i * 10 + 10;
+                    spriteBatch.Draw(itemPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White);
+                    intervalROW = j * 10+10;
+                   
                     if ((i == column) && (j == row))
                     {
-                        spriteBatch.Draw(itemFrame, new Vector2(i * 64 + inventor, j * 64 + inventor), Color.White);
+                       spriteBatch.Draw(itemFrame, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW-10), Color.White);
                     }
                 }
             }
 
+            spriteBatch.DrawString(inventoryFont, "Damage: ", new Vector2(130, 225), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
+            spriteBatch.DrawString(inventoryFont, "Armour: ", new Vector2(130, 298), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
+            spriteBatch.DrawString(inventoryFont, "Health: ", new Vector2(130, 374), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
             spriteBatch.End();
 
             //base.Draw(gameTime);
-        }
+        } 
     }
 }

@@ -22,6 +22,8 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
 
         public Hero()
         {
+            var itemArray = new Item[16];
+            Items = new List<Item>(itemArray);
             herolevels.Clear();//adding the needed xp for next lvls
             herolevels.Add(40);
             herolevels.Add(95);
