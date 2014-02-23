@@ -40,7 +40,7 @@ namespace AwesomeRPGgameUsingOOP
         {
             startingScene = new StartingScene(this);
             graphics = new GraphicsDeviceManager(this);
-            mainScene=new MainScene(this);
+            //mainScene=new MainScene(this);
             gameoverScene=new GameOverScene(this);
             hero = new Hero();
             Content.RootDirectory = "Content";
@@ -78,7 +78,9 @@ namespace AwesomeRPGgameUsingOOP
             #region graphicset
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
-            graphics.IsFullScreen = true;
+
+            //TEMPORARY CHANGED DUE TO TESTING PROBLEMS IN FULLS SCREEN
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             #endregion
 
@@ -100,8 +102,7 @@ namespace AwesomeRPGgameUsingOOP
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
-           
+                      
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
             {
                 this.Exit();
@@ -152,7 +153,8 @@ namespace AwesomeRPGgameUsingOOP
             }
             if (MainStarted)
             {
-                mainScene.Draw(gameTime, spriteBatch);
+                mainScene = new MainScene(this, Content, graphics, gameTime, spriteBatch);
+                mainScene.Initialize();
                 //   MainStarted = false;
             }
             if (GameOverStarted)

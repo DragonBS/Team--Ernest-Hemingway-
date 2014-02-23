@@ -17,15 +17,31 @@ namespace AwesomeRPGgameUsingOOP.Scenes
     /// </summary>
     public class MainScene : Microsoft.Xna.Framework.GameComponent
     {
+        private const float scalePlayer = .9f;
+
         private Texture2D backgroundTexture;
         private Vector2 backgroundVector;
 
         private Texture2D playerTexture;
         private Vector2 playerVector;
 
-        public MainScene(Game game)
+        private ContentManager content;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        private GameTime gameTime;
+
+        public ContentManager Content { get; set; }
+        public GraphicsDeviceManager Graphics { get; set; }
+        public GameTime Gametime { get; set; }
+        public SpriteBatch SpriteBatch { get; set; }
+
+        public MainScene(Game game, ContentManager content, GraphicsDeviceManager graphics,GameTime gameTime, SpriteBatch spriteBatch)
             : base(game)
         {
+            this.Content = content;
+            this.Graphics = graphics;
+            this.SpriteBatch = spriteBatch;
+            this.Gametime = gameTime;
             // TODO: Construct any child components here
         }
 
@@ -35,23 +51,24 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
-
+            this.LoadContent(this.Content, this.Graphics);
+            this.Draw(this.Gametime, this.SpriteBatch);
             base.Initialize();
         }
 
         public void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-
             // TODO: use this.Content to load your game content here
 
-            backgroundTexture = content.Load<Texture2D>("map");
+            backgroundTexture = Content.Load<Texture2D>("map");
             backgroundVector = new Vector2(0, 0);
 
-            playerTexture = content.Load<Texture2D>("hero");
-            playerVector = new Vector2(400, 400);
+            //playerTexture = Content.Load<Texture2D>("hero");
+            //playerVector = new Vector2(400, 400);
         }
+
+
+
 
         /// <summary>
         /// Allows the game component to update itself.
@@ -59,24 +76,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            #region Controls
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
-            {
 
-            }
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
-            {
-
-            }
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
-            {
-
-            }
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
-            {
-
-            }
-            #endregion
             // TODO: Add your update code here
 
             #region Controls
@@ -105,17 +105,15 @@ namespace AwesomeRPGgameUsingOOP.Scenes
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            //GraphicsDevice.Clear(Color.CornflowerBlue);
-
             // TODO: Add your drawing code here
+
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
 
-           // spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
+            spriteBatch.Draw(backgroundTexture, backgroundVector, Color.White);
 
-            //float scale = .9f; //50% smaller
-            //spriteBatch.Draw(playerTexture, playerVector, new Rectangle(0, 0, 30, 60), Color.White, 0f, playerVector, scale, SpriteEffects.None, 0f);
-
+            //spriteBatch.Draw(playerTexture, playerVector, new Rectangle(0, 0, 30, 60), Color.White, 0f, playerVector, scalePlayer, SpriteEffects.None, 0f);
 
             spriteBatch.End();
 
