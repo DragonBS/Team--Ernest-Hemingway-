@@ -33,6 +33,8 @@ namespace AwesomeRPGgameUsingOOP
         static public bool MainStarted;
         static public bool GameOverStarted;
 
+  
+
         public Game1()
         {
             startingScene = new StartingScene(this);
@@ -72,6 +74,7 @@ namespace AwesomeRPGgameUsingOOP
             MainStarted=false;
             GameOverStarted=false;
             ItemPics.LoadContent(Content);
+            
 
             #region graphicset
             graphics.PreferredBackBufferHeight = 600;
