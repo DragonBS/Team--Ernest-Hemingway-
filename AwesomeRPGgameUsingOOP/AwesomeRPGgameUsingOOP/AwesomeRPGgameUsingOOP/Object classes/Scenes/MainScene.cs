@@ -65,24 +65,32 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
-
+ 
             #region Controls
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
             {
                 this.playerPosition.Y += 5;
+                this.playerRectangle.Y = 0;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
             {
                 this.playerPosition.Y -= 5;
+                this.playerRectangle.Y = 128;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
             {
                 this.playerPosition.X -= 5;
+                this.playerRectangle.Y = 64;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
             {
                 this.playerPosition.X += 5;
+                this.playerRectangle.Y = 192;
             }
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Space))
+            {
+                this.HeroAttack(gameTime);
+           }
             #endregion
 
             base.Update(gameTime);
@@ -103,6 +111,34 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        //TO DO fix return state whe attacking
+        protected void HeroAttack(GameTime gameTime)
+        {
+           int timer = 10;
+           double elapsed = gameTime.ElapsedGameTime.TotalMilliseconds;
+           timer -= (int)elapsed;
+            this.playerRectangle.Y += 120;
+
+            if (timer <= 0)
+            {
+                this.playerRectangle.Y -= 120;
+                timer = 10;
+            }
+        }
+
+
+        //TO DO
+        protected void AnimateHero(GameTime gameTime, int direction, Vector2 playerPostion, Rectangle playerRectangle)
+        {
+
+        }
+
+        //TO DO check if current position is available
+        protected void CheckHeroPosition(Vector2 playerPostion)
+        {
+
         }
     }
 
