@@ -69,23 +69,19 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             #region Controls
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
             {
-                this.playerPosition.Y += 5;
-                this.playerRectangle.Y = 0;
+                this.AnimateHero(gameTime, "down", playerPosition, playerRectangle);
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
             {
-                this.playerPosition.Y -= 5;
-                this.playerRectangle.Y = 128;
+                this.AnimateHero(gameTime, "up", playerPosition, playerRectangle);
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
             {
-                this.playerPosition.X -= 5;
-                this.playerRectangle.Y = 64;
+                this.AnimateHero(gameTime, "left", playerPosition, playerRectangle);
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
             {
-                this.playerPosition.X += 5;
-                this.playerRectangle.Y = 192;
+                this.AnimateHero(gameTime, "right", playerPosition, playerRectangle);
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Space))
             {
@@ -130,9 +126,28 @@ namespace AwesomeRPGgameUsingOOP.Scenes
 
 
         //TO DO
-        protected void AnimateHero(GameTime gameTime, int direction, Vector2 playerPostion, Rectangle playerRectangle)
+        protected void AnimateHero(GameTime gameTime, string direction, Vector2 playerPostion, Rectangle playerRectangle)
         {
-
+            if (direction=="up")
+            {
+                this.playerPosition.Y -= 5;
+                this.playerRectangle.Y = 128;
+            }
+            else if (direction == "down")
+            {
+                this.playerPosition.Y += 5;
+                this.playerRectangle.Y = 0;
+            }
+            else if (direction == "left")
+            {
+                this.playerPosition.X -= 5;
+                this.playerRectangle.Y = 64;
+            }
+            else if (direction == "right")
+            {
+                this.playerPosition.X += 5;
+                this.playerRectangle.Y = 192;
+            }
         }
 
         //TO DO check if current position is available
