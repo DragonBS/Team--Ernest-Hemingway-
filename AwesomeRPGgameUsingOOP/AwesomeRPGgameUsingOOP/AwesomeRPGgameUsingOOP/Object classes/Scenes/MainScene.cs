@@ -27,23 +27,11 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         private Vector2 playerVector;
         private Vector2 playerPosition;
 
-        private ContentManager content;
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
-        private GameTime gameTime;
 
-        public ContentManager Content { get; set; }
-        public GraphicsDeviceManager Graphics { get; set; }
-        public GameTime Gametime { get; set; }
-        public SpriteBatch SpriteBatch { get; set; }
-
-        public MainScene(Game game, ContentManager content, GraphicsDeviceManager graphics,GameTime gameTime, SpriteBatch spriteBatch)
+        public MainScene(Game game)
             : base(game)
         {
-            this.Content = content;
-            this.Graphics = graphics;
-            this.SpriteBatch = spriteBatch;
-            this.Gametime = gameTime;
+
             // TODO: Construct any child components here
         }
 
@@ -53,8 +41,6 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         /// </summary>
         public override void Initialize()
         {
-            this.LoadContent(this.Content, this.Graphics);
-            this.Draw(this.Gametime, this.SpriteBatch);
             base.Initialize();
         }
 
@@ -62,16 +48,14 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         {
             // TODO: use this.Content to load your game content here
 
-            backgroundTexture = Content.Load<Texture2D>("map");
+            backgroundTexture = content.Load<Texture2D>("map");
             backgroundVector = new Vector2(0, 0);
 
-            playerTexture = Content.Load<Texture2D>("hero");
+            playerTexture = content.Load<Texture2D>("hero");
             playerVector = new Vector2(0, 0);
             playerRectangle = new Rectangle(0, 0, 30, 60);
             playerPosition = new Vector2(380, 480);
         }
-
-
 
 
         /// <summary>
@@ -80,29 +64,26 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-
             // TODO: Add your update code here
 
             #region Controls
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
             {
-                this.playerVector.X++;
+                this.playerPosition.Y += 5;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
             {
-                this.playerVector.X--;
+                this.playerPosition.Y -= 5;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
             {
-                this.playerVector.Y--;
+                this.playerPosition.X -= 5;
             }
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
             {
-                this.playerVector.Y++;
+                this.playerPosition.X += 5;
             }
-            spriteBatch.Draw(playerTexture, playerVector, null, Color.White, 0f, new Vector2(100,50), scalePlayer, SpriteEffects.None, 0f);
             #endregion
-            // TODO: Add your update code here
 
             base.Update(gameTime);
         }

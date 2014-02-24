@@ -39,7 +39,7 @@ namespace AwesomeRPGgameUsingOOP
         {
             startingScene = new StartingScene(this);
             graphics = new GraphicsDeviceManager(this);
-            //mainScene=new MainScene(this);
+            mainScene = new MainScene(this);
             gameoverScene=new GameOverScene(this);
             hero = new Hero();
             Content.RootDirectory = "Content";
@@ -74,7 +74,8 @@ namespace AwesomeRPGgameUsingOOP
             MainStarted=false;
             GameOverStarted=false;
             ItemPics.LoadContent(Content);
-            
+
+            mainScene.LoadContent(Content, graphics);
 
             #region graphicset
             graphics.PreferredBackBufferHeight = 600;
@@ -123,7 +124,7 @@ namespace AwesomeRPGgameUsingOOP
                 }
                 if (MainStarted)
                 {
-                 //   mainScene.Update(gameTime);
+                      mainScene.Update(gameTime);
                  //   MainStarted = false;
                 }
                 if (GameOverStarted)
@@ -154,8 +155,8 @@ namespace AwesomeRPGgameUsingOOP
             }
             if (MainStarted)
             {
-                mainScene = new MainScene(this, Content, graphics, gameTime, spriteBatch);
-                mainScene.Initialize();
+                
+                mainScene.Draw(gameTime,spriteBatch);
                 //   MainStarted = false;
             }
             if (GameOverStarted)
