@@ -60,11 +60,11 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            if ((Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter)))
-            {
-                MainScene.skillsOpen = true;
+            //if ((Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Enter)))
+            //{
+            //    MainScene.skillsOpen = true;
                 
-            }
+            //}
 
             // TODO: Add your update code here
 
