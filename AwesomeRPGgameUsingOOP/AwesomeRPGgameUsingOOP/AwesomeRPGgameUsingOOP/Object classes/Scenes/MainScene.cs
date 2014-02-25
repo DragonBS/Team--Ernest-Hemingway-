@@ -115,7 +115,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             {
                 this.AnimateHero(gameTime, "attack", playerPosition, playerRectangle);
             }
-            if (Keyboard.GetState(PlayerIndex.One).GetPressedKeys().Equals(null))
+            if (Keyboard.GetState(PlayerIndex.One).GetPressedKeys().Length == 0)
 	        {
 		        this.AnimateHero(gameTime, "standing", playerPosition, playerRectangle);
 	        }
@@ -156,7 +156,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             {
                 return;
             }
-            //HeroStanding = false;
+            HeroStanding = false;
             if (direction == "up")
             {
                 this.playerPosition.Y -= PlayerSpeed;
@@ -185,7 +185,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             else if (direction == "standing")
             {
                 this.playerRectangle.X = 0;
-              //  HeroStanding = true;
+                HeroStanding = true;
             }
         }
 
