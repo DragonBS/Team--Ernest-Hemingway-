@@ -18,7 +18,8 @@ namespace AwesomeRPGgameUsingOOP.Scenes
     /// </summary>
     public class MainScene : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        private const float scalePlayer = 1.1f;
+        private const float ScalePlayer = 1.1f;
+        private const float PlayerSpeed = 10;
 
         private Texture2D backgroundTexture;
         private Vector2 backgroundVector;
@@ -142,7 +143,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             Rectangle sourceRectangle = new Rectangle(FrameWidth * frame, playerRectangle.Y,
                 FrameWidth, playerRectangle.Height);
 
-            spriteBatch.Draw(playerTexture, playerPosition, sourceRectangle, Color.White, 0f, playerVector, scalePlayer, SpriteEffects.None, 0f);
+            spriteBatch.Draw(playerTexture, playerPosition, sourceRectangle, Color.White, 0f, playerVector, ScalePlayer, SpriteEffects.None, 0f);
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -158,27 +159,27 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             //HeroStanding = false;
             if (direction == "up")
             {
-                this.playerPosition.Y -= 5;
+                this.playerPosition.Y -= PlayerSpeed;
                 this.playerRectangle.Y = 96;
             }
             else if (direction == "down")
             {
-                this.playerPosition.Y += 5;
+                this.playerPosition.Y += PlayerSpeed;
                 this.playerRectangle.Y = 0;
             }
             else if (direction == "left")
             {
-                this.playerPosition.X -= 5;
+                this.playerPosition.X -= PlayerSpeed;
                 this.playerRectangle.Y = 48;
             }
             else if (direction == "right")
             {
-                this.playerPosition.X += 5;
+                this.playerPosition.X += PlayerSpeed;
                 this.playerRectangle.Y = 144;
             }
             else if (direction == "attack")
             {
-                this.playerPosition.X += 5;
+                this.playerPosition.X += PlayerSpeed;
                 this.playerRectangle.Y += 192;
             }
             else if (direction == "standing")
