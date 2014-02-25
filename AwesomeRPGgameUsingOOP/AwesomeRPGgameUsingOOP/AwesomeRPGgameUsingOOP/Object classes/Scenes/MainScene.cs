@@ -151,6 +151,10 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         //TO DO bug with heroStanding and attack 
         protected void AnimateHero(GameTime gameTime, string direction, Vector2 playerPostion, Rectangle playerRectangle)
         {
+            if (this.CheckHeroPosition(playerPosition, direction) == false )
+            {
+                return;
+            }
             //HeroStanding = false;
             if (direction == "up")
             {
@@ -164,13 +168,8 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             }
             else if (direction == "left")
             {
+                this.playerPosition.X -= 5;
                 this.playerRectangle.Y = 48;
-                for (int i = 0; i < 5; i++)
-                {
-                    this.playerPosition.X -= 1;
-                    this.playerRectangle.X += 30;
-                }
-                this.playerRectangle.X = 0;
             }
             else if (direction == "right")
             {
@@ -190,9 +189,27 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         }
 
         //TO DO check if current position is available
-        protected void CheckHeroPosition(Vector2 playerPostion)
+        protected bool CheckHeroPosition(Vector2 postion, string direction)
         {
+            Rectangle field = new Rectangle(30,48,backgroundTexture.Width-60,backgroundTexture.Height-96);
 
+            if(direction == "up")
+            {
+                postion.Y -= 5;
+            }
+            if (direction == "down")
+            {
+                postion.Y += 5;
+            }
+            if (direction == "right")
+            {
+                postion.X += 5;
+            }
+            if (direction == "up")
+            {
+                postion.X -= 5;
+            }
+            return field.Contains((int)postion.X, (int)postion.Y);
         }
     }
 }
