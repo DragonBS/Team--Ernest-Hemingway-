@@ -27,6 +27,7 @@ namespace AwesomeRPGgameUsingOOP
         MainScene mainScene;
         GameOverScene gameoverScene;
         CharacterSheet_Inventory inventory;
+        SkillsScene skills;
         Hero hero;
 
         internal int delayer;
@@ -47,6 +48,7 @@ namespace AwesomeRPGgameUsingOOP
             mainScene = new MainScene(this);
             gameoverScene = new GameOverScene(this);
             inventory = new CharacterSheet_Inventory(this, ref hero);
+            skills = new SkillsScene(this, hero);
             Content.RootDirectory = "Content";
         }
 
@@ -83,6 +85,7 @@ namespace AwesomeRPGgameUsingOOP
             mainScene.LoadContent(Content, graphics);
 
             inventory.LoadContent(Content);
+            skills.LoadContent(Content);
 
             #region graphicset
             graphics.PreferredBackBufferHeight = 600;
@@ -131,6 +134,12 @@ namespace AwesomeRPGgameUsingOOP
                     mainScene.UpdateFrame(gameTime, elapsedTime);
                     //   MainStarted = false;
                 }
+                if (MainStarted && IsSkillsOpen == false)
+                {
+                    float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    mainScene.UpdateFrame(gameTime, elapsedTime);
+                    //   MainStarted = false;
+                }
                 if (GameOverStarted)
                 {
                     //   gameoverScene.Update(gameTime);
@@ -141,6 +150,11 @@ namespace AwesomeRPGgameUsingOOP
                     inventory.Update(gameTime);
                     //    gameoverScene = false;
                 }
+                if (IsSkillsOpen)
+                {
+                    skills.Update(gameTime);
+                    //    gameoverScene = false;
+                }
 
                 if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.I) && IsInventoryOpen == false)
                 {
@@ -149,6 +163,15 @@ namespace AwesomeRPGgameUsingOOP
                 else if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.I) && IsInventoryOpen == true)
                 {
                     IsInventoryOpen = false;
+                }
+
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.S) && IsSkillsOpen == false)
+                {
+                    IsSkillsOpen = true;
+                }
+                else if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.S) && IsSkillsOpen == true)
+                {
+                    IsSkillsOpen = false;
                 }
 
                 delayer = 0;
@@ -180,6 +203,10 @@ namespace AwesomeRPGgameUsingOOP
                     inventory.Draw(gameTime, spriteBatch);
                 }
                 //   MainStarted = false;
+                if (IsSkillsOpen)
+                {
+                    skills.Draw(gameTime, spriteBatch);
+                }
             }
             if (GameOverStarted)
             {
