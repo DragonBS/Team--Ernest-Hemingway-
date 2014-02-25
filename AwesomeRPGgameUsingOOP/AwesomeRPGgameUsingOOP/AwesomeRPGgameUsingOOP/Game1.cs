@@ -124,7 +124,8 @@ namespace AwesomeRPGgameUsingOOP
                 }
                 if (MainStarted)
                 {
-                      mainScene.Update(gameTime);
+                    float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    mainScene.UpdateFrame(gameTime, elapsedTime);
                  //   MainStarted = false;
                 }
                 if (GameOverStarted)
@@ -155,7 +156,6 @@ namespace AwesomeRPGgameUsingOOP
             }
             if (MainStarted)
             {
-                
                 mainScene.Draw(gameTime,spriteBatch);
                 //   MainStarted = false;
             }
