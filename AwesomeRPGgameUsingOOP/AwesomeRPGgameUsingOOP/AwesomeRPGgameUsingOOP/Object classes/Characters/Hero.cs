@@ -15,7 +15,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
         public Vector2 HeroVector { get; set; }
 
         public int FreeInventorySlots { get; set; }
-        public int HeroLevel { get; set; }
+        public int Level { get; set; }
         public int SkillPoints { get; set; }
         public int PowerPoints { get; set; }
 
@@ -34,7 +34,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
             this.IsAlive = true;
             this.FreeInventorySlots = 16;
             this.Experience = 0;
-            this.HeroLevel = 1;
+            this.Level = 1;
             this.Health = 100;
             this.Armour = 5;
             this.Damage = 5;
@@ -59,7 +59,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
             this.Experience = this.Experience + value;
             if (this.Experience >= herolevels[0])
             {
-                this.HeroLevel++;
+                this.Level++;
                 this.SkillPoints++;
                 this.PowerPoints = this.PowerPoints + 5;
                 herolevels.RemoveAt(0);

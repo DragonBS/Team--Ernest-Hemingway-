@@ -82,7 +82,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
         {
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.I))
             {
-                MainScene.inventoryOpen = false;
+               // MainScene.inventoryOpen = false;
             }
             // TODO: Add your update code here
             #region Controls

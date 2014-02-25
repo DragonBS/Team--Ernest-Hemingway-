@@ -177,7 +177,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
                 this.playerPosition.X += PlayerSpeed;
                 this.playerRectangle.Y = 144;
             }
-            else if (direction == "attack")
+            else if (direction == "attack"&&playerRectangle.Y + 192 < 384)
             {
                 this.playerPosition.X += PlayerSpeed;
                 this.playerRectangle.Y += 192;

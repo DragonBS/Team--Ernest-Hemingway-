@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using AwesomeRPGgameUsingOOP.Scenes;
 using AwesomeRPGgameUsingOOP.Object_classes;
 using AwesomeRPGgameUsingOOP.Object_classes.Items;
+using AwesomeRPGgameUsingOOP.Object_classes.Scenes;
 
 namespace AwesomeRPGgameUsingOOP
 {
@@ -25,23 +26,26 @@ namespace AwesomeRPGgameUsingOOP
         StartingScene startingScene;
         MainScene mainScene;
         GameOverScene gameoverScene;
-        Hero hero; 
-         
+        CharacterSheet_Inventory inventory;
+        Hero hero;
+
         internal int delayer;
-        
+
         static public bool GameStarted;
         static public bool MainStarted;
         static public bool GameOverStarted;
 
-  
+        public bool IsInventoryOpen { get; set; }
+        public bool IsSkillsOpen { get; set; }
 
         public Game1()
         {
+            hero = new Hero();
             startingScene = new StartingScene(this);
             graphics = new GraphicsDeviceManager(this);
             mainScene = new MainScene(this);
-            gameoverScene=new GameOverScene(this);
-            hero = new Hero();
+            gameoverScene = new GameOverScene(this);
+            inventory = new CharacterSheet_Inventory(this, ref hero);
             Content.RootDirectory = "Content";
         }
 
@@ -64,18 +68,20 @@ namespace AwesomeRPGgameUsingOOP
         /// </summary>
         protected override void LoadContent()
         {
-            
+
             // Create a new SpriteBatch, which can be used to draw textures.
             startingScene.LoadContent(Content, graphics);
             spriteBatch = new SpriteBatch(GraphicsDevice);
             delayer = 0;
             // TODO: use this.Content to load your game content here
-            GameStarted=true;
-            MainStarted=false;
-            GameOverStarted=false;
+            GameStarted = true;
+            MainStarted = false;
+            GameOverStarted = false;
             ItemPics.LoadContent(Content);
 
             mainScene.LoadContent(Content, graphics);
+
+            inventory.LoadContent(Content);
 
             #region graphicset
             graphics.PreferredBackBufferHeight = 600;
@@ -104,36 +110,47 @@ namespace AwesomeRPGgameUsingOOP
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-                      
+
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
             {
                 this.Exit();
             }
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-            
+
             delayer++;
-            if (delayer==7)
+            if (delayer == 7)
             {
-                delayer = 0;
                 if (GameStarted)
                 {
                     startingScene.Update(gameTime);
-                //    GameStarted = false;
+                    //    GameStarted = false;
                 }
-                if (MainStarted)
+                if (MainStarted && IsInventoryOpen == false)
                 {
                     float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
                     mainScene.UpdateFrame(gameTime, elapsedTime);
-                 //   MainStarted = false;
+                    //   MainStarted = false;
                 }
                 if (GameOverStarted)
                 {
-                //   gameoverScene.Update(gameTime);
-                //    gameoverScene = false;
+                    //   gameoverScene.Update(gameTime);
+                    //    gameoverScene = false;
                 }
-                
+                if (IsInventoryOpen)
+                {
+                    inventory.Update(gameTime);
+                    //    gameoverScene = false;
+                }
+
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.I) && IsInventoryOpen == false)
+                {
+                    IsInventoryOpen = true;
+                }
+                else if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.I) && IsInventoryOpen == true)
+                {
+                    IsInventoryOpen = false;
+                }
+
+                delayer = 0;
             }
 
             // TODO: Add your update logic here
@@ -156,7 +173,11 @@ namespace AwesomeRPGgameUsingOOP
             }
             if (MainStarted)
             {
-                mainScene.Draw(gameTime,spriteBatch);
+                mainScene.Draw(gameTime, spriteBatch);
+                if (IsInventoryOpen)
+                {
+                    inventory.Draw(gameTime, spriteBatch);
+                }
                 //   MainStarted = false;
             }
             if (GameOverStarted)
@@ -164,8 +185,9 @@ namespace AwesomeRPGgameUsingOOP
                 //gameoverScene.Draw(gameTime, spriteBatch);
                 //    gameoverScene = false;
             }
-            
-                       // TODO: Add your drawing code here
+
+
+            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
