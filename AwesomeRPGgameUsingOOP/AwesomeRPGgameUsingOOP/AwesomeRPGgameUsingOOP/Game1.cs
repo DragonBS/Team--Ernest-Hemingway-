@@ -41,6 +41,7 @@ namespace AwesomeRPGgameUsingOOP
         public Game1()
         {
             hero = new Hero();
+            hero.Items.Add(new Gloves());
             startingScene = new StartingScene(this);
             graphics = new GraphicsDeviceManager(this);
             mainScene = new MainScene(this);
