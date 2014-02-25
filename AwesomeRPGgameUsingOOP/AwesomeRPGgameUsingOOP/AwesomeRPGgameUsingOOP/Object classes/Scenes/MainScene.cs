@@ -99,26 +99,26 @@ namespace AwesomeRPGgameUsingOOP.Scenes
             {
                 this.AnimateHero(gameTime, "down", playerPosition, playerRectangle);
             }
-            else if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
             {
                 this.AnimateHero(gameTime, "up", playerPosition, playerRectangle);
             }
-            else if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
             {
                 this.AnimateHero(gameTime, "left", playerPosition, playerRectangle);
             }
-            else if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
             {
                 this.AnimateHero(gameTime, "right", playerPosition, playerRectangle);
             }
-            else if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Space))
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Space))
             {
                 this.AnimateHero(gameTime, "attack", playerPosition, playerRectangle);
             }
-            else
-            {
-                this.AnimateHero(gameTime, "standing", playerPosition, playerRectangle);
-            }
+            if (Keyboard.GetState(PlayerIndex.One).GetPressedKeys().Equals(null))
+	        {
+		        this.AnimateHero(gameTime, "standing", playerPosition, playerRectangle);
+	        }
             #endregion
 
             base.Update(gameTime);
