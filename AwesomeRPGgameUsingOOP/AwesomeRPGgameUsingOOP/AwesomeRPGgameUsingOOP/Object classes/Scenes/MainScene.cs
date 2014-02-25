@@ -19,7 +19,7 @@ namespace AwesomeRPGgameUsingOOP.Scenes
     public class MainScene : Microsoft.Xna.Framework.DrawableGameComponent
     {
         private const float ScalePlayer = 1.1f;
-        private const float PlayerSpeed = 10;
+        private const float PlayerSpeed = 5;
 
         private Texture2D backgroundTexture;
         private Vector2 backgroundVector;
@@ -193,6 +193,23 @@ namespace AwesomeRPGgameUsingOOP.Scenes
         protected bool CheckHeroPosition(Vector2 postion, string direction)
         {
             Rectangle field = new Rectangle(30,48,backgroundTexture.Width-60,backgroundTexture.Height-96);
+
+            List<Rectangle> allowedFields = new List<Rectangle>(){
+                new Rectangle(85, 455, 615, 55),
+                new Rectangle(340, 455, 110, 55),
+                new Rectangle(290, 395, 70, 420),
+                new Rectangle(340, 455, 110, 55),
+                new Rectangle(15, 85, 770, 25),
+                new Rectangle(15, 85, 40, 460),
+                new Rectangle(15, 530, 250, 15),
+                new Rectangle(750, 85, 35, 460),
+                new Rectangle(530, 520, 255, 25),
+                new Rectangle(255, 215, 160, 80),
+                new Rectangle(120, 255, 295, 40),
+                new Rectangle(155, 245, 80, 70),
+                new Rectangle(180, 245, 55, 130),
+                new Rectangle(120, 255, 580, 25)
+            };
 
             if(direction == "up")
             {
