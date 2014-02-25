@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using AwesomeRPGgameUsingOOP.Object_classes.Items;
+using AwesomeRPGgameUsingOOP.Object_classes.Scenes;
+using AwesomeRPGgameUsingOOP.Scenes;
 
 
 namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
@@ -19,11 +21,10 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
     /// </summary>
     public class CharacterSheet_Inventory : Microsoft.Xna.Framework.GameComponent
     {
-        Hero hero;
+        internal Hero hero;
         internal int placeInInventory;
         internal int row;
         internal int column;
-        internal float gamepassed;
         internal float timer;
         internal const float DELAY = 0.15f;
         internal Item item;
@@ -38,13 +39,12 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
 
         private SpriteFont inventoryFont;
 
-        public CharacterSheet_Inventory(Game game)
+        public CharacterSheet_Inventory(Game game, ref Hero thisHero)
             : base(game)
         {
-            
-            hero = new Hero();
-            hero.Items.Add(new Gloves());
-            hero.Items.Add(new Boots());
+
+            this.hero = new Hero();
+            hero = thisHero;
             // TODO: Construct any child components here
         }
 
@@ -80,75 +80,77 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            gamepassed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            timer = timer - gamepassed;
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.I))
+            {
+                MainScene.inventoryOpen = false;
+            }
             // TODO: Add your update code here
             #region Controls
-                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Down))
+            {
+                if (placeInInventory <= 11)
                 {
-                    if (placeInInventory <= 11)
-                    {
-                        placeInInventory = placeInInventory + 4;
-                        row++;
-                    }
-                    else
-                    {
-                        placeInInventory = placeInInventory - 11;
-                        row = 0;
-                    }
+                    placeInInventory = placeInInventory + 4;
+                    row++;
                 }
-                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
+                else
                 {
-                    if (placeInInventory > 3)
-                    {
-                        placeInInventory = placeInInventory - 4;
-                        row--;
-                    }
-                    else
-                    {
-                        placeInInventory = placeInInventory + 11;
-                        row = 3;
-                    }
+                    placeInInventory = placeInInventory - 11;
+                    row = 0;
                 }
-                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
+            }
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Up))
+            {
+                if (placeInInventory > 3)
                 {
-                    if ((placeInInventory != 0) && (placeInInventory % 4 != 0))
-                    {
-                        placeInInventory = placeInInventory - 1;
-                        column--;
-                    }
-                    else
-                    {
-                        placeInInventory = placeInInventory + 3;
-                        column = 3;
-                    }
+                    placeInInventory = placeInInventory - 4;
+                    row--;
                 }
-                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
+                else
                 {
-                    if ((placeInInventory != 3) && (placeInInventory != 7) && (placeInInventory != 11) && (placeInInventory != 15))
-                    {
-                        placeInInventory = placeInInventory + 1;
-                        column++;
-                    }
-                    else
-                    {
-                        placeInInventory = placeInInventory - 3;
-                        column = 0;
-                    }
+                    placeInInventory = placeInInventory + 11;
+                    row = 3;
                 }
+            }
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Left))
+            {
+                if ((placeInInventory != 0) && (placeInInventory % 4 != 0))
+                {
+                    placeInInventory = placeInInventory - 1;
+                    column--;
+                }
+                else
+                {
+                    placeInInventory = placeInInventory + 3;
+                    column = 3;
+                }
+            }
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Right))
+            {
+                if ((placeInInventory != 3) && (placeInInventory != 7) && (placeInInventory != 11) && (placeInInventory != 15))
+                {
+                    placeInInventory = placeInInventory + 1;
+                    column++;
+                }
+                else
+                {
+                    placeInInventory = placeInInventory - 3;
+                    column = 0;
+                }
+            }
 
             #endregion
 
 
-                if (placeInInventory>hero.Items.Count-1)
-                {
-                    item = null;
-                }
-                else
-                {
-                    item = hero.Items[placeInInventory];
-                }
-            
+            if (placeInInventory > hero.Items.Count - 1)
+            {
+                item = null;
+            }
+            else
+            {
+                item = hero.Items[placeInInventory];
+            }
+
             base.Update(gameTime);
         }
 
@@ -165,10 +167,10 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
             //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            
+
             spriteBatch.Begin();
             spriteBatch.Draw(inventory, new Vector2(0, 0), Color.White);
-            
+
             if (item == null)
             {
                 spriteBatch.DrawString(inventoryFont, "0", new Vector2(250, 225), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
@@ -180,10 +182,10 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
                 spriteBatch.DrawString(inventoryFont, item.Damage.ToString(), new Vector2(250, 225), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
                 spriteBatch.DrawString(inventoryFont, item.Armour.ToString(), new Vector2(250, 298), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
                 spriteBatch.DrawString(inventoryFont, item.Health.ToString(), new Vector2(250, 374), Color.Black, 0, new Vector2(0, 0), 1.35f, new SpriteEffects(), 0f);
-                
+
             }
             Item rowColItem;
-            
+
             for (int i = 0; i < 4; i++) // rows
             {
                 intervalROW = 0;
@@ -200,7 +202,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
                     {
                         rowColItem = hero.Items[j * 4 + i];
                     }
-                                        
+
                     if (rowColItem != null)
                     {
                         switch (rowColItem.GetType().Name.ToString())
@@ -235,10 +237,10 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
                     }
                     //spriteBatch.Draw(itemPic, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW), Color.White); // sword
                     intervalROW = j * 10 + 10;
-                   
+
                     if ((i == column) && (j == row))
                     {
-                       spriteBatch.Draw(itemFrame, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW-10), Color.White); // framework
+                        spriteBatch.Draw(itemFrame, new Vector2(i * 64 + inventorX + intervalCOL, j * 64 + inventorY + intervalROW - 10), Color.White); // framework
                     }
                 }
             }
@@ -249,6 +251,6 @@ namespace AwesomeRPGgameUsingOOP.Object_classes.Scenes
             spriteBatch.End();
 
             //base.Draw(gameTime);
-        } 
+        }
     }
 }

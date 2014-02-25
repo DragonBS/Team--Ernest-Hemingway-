@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace AwesomeRPGgameUsingOOP.Object_classes
 {
-    public class Hero: Character
+    public class Hero : Character
     {
         static List<int> herolevels = new List<int>(); //list containing exp treshholds for the character levels;
 
@@ -15,16 +15,16 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
         public Vector2 HeroVector { get; set; }
 
         public int FreeInventorySlots { get; set; }
-        public int Level { get; set; }
+        public int HeroLevel { get; set; }
         public int SkillPoints { get; set; }
         public int PowerPoints { get; set; }
-        
+
 
         public Hero()
         {
             //var itemArray = new Item[16];
             Items = new List<Item>(16);
-            
+
             herolevels.Clear();//adding the needed xp for next lvls
             herolevels.Add(40);
             herolevels.Add(95);
@@ -34,7 +34,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
             this.IsAlive = true;
             this.FreeInventorySlots = 16;
             this.Experience = 0;
-            this.Level = 1;
+            this.HeroLevel = 1;
             this.Health = 100;
             this.Armour = 5;
             this.Damage = 5;
@@ -47,7 +47,7 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
 
         public void PickupItem(Item item)
         {
-            if (this.FreeInventorySlots!=0)
+            if (this.FreeInventorySlots != 0)
             {
                 this.FreeInventorySlots--;
                 this.Items.Add(item);
@@ -57,9 +57,9 @@ namespace AwesomeRPGgameUsingOOP.Object_classes
         public void XPgain(int value)
         {
             this.Experience = this.Experience + value;
-            if (this.Experience>=herolevels[0])
+            if (this.Experience >= herolevels[0])
             {
-                this.Level++;
+                this.HeroLevel++;
                 this.SkillPoints++;
                 this.PowerPoints = this.PowerPoints + 5;
                 herolevels.RemoveAt(0);
